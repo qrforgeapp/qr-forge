@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QR Forge — Free QR Code Generator & Scanner</title>
+<meta name="description" content="QR Forge is a free online QR code generator and scanner. Create URL, WhatsApp, Wi-Fi, Instagram, YouTube, Google Maps, contact, SMS, event and payment QR codes.">
+<meta name="keywords" content="free QR code generator, WiFi QR, WhatsApp QR, Instagram QR, YouTube QR, Google Maps QR, contact QR, QR scanner">
+<meta name="robots" content="index,follow">
+<style>
+:root{--p:#5b4cf6;--p2:#7c3aed;--bg:#f5f7fb;--ink:#172033;--muted:#697386;--line:#e2e6ef;--card:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:46px 18px 54px;text-align:center}
+.logo{font-size:clamp(38px,9vw,62px);font-weight:900;letter-spacing:-2px}.logo span{opacity:.72}
+header p{max-width:720px;margin:12px auto 0;font-size:17px;line-height:1.6;opacity:.95}
+nav{position:sticky;top:0;z-index:5;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px;display:flex;gap:8px;justify-content:center;overflow:auto}
+nav a{color:var(--ink);text-decoration:none;font-weight:700;padding:9px 12px;border-radius:10px;white-space:nowrap}nav a:hover{background:#eef0ff}
+main{max-width:1120px;margin:28px auto;padding:0 15px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 30px #18223a0d;margin-bottom:20px}
+h2{margin-top:0}h3{margin-bottom:8px}.muted,.hint{color:var(--muted);font-size:14px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 18px}.tabs button,.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer;font-size:14px}
+.tabs button{background:#eef0f7;color:#343b52}.tabs button.active{background:var(--p);color:#fff}
+label{display:block;font-weight:750;margin:12px 0 6px}input,textarea,select{width:100%;padding:12px 13px;border:1px solid #d7dce8;border-radius:11px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:100px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.primary{background:var(--p);color:#fff;width:100%;font-size:16px;margin-top:16px}.secondary{background:#eef0f7;color:#283149}.danger{background:#fff0f0;color:#a33131}
+#qrWrap{text-align:center;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center}.qrbox{background:#fff;padding:14px;border-radius:16px;display:inline-flex;position:relative}
+#qr canvas,#qr img{max-width:100%;height:auto}.downloads{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.options{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}.color{height:44px;padding:4px}
+.features,.seo-grid,.faq{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature,.seo-item{padding:17px;border:1px solid var(--line);border-radius:15px;background:#fafbfe}.feature b{display:block;margin-bottom:6px}
+details{background:#fafbfe;border:1px solid var(--line);border-radius:13px;padding:14px;margin:9px 0}summary{font-weight:800;cursor:pointer}
+.toolpanel{display:none}.toolpanel.active{display:block}.notice{padding:12px;border-radius:12px;background:#f0efff;color:#4236a8;font-size:14px}
+footer{padding:35px 15px;text-align:center;color:var(--muted)}footer a{color:var(--p)}
+@media(max-width:700px){.grid,.grid3,.features,.seo-grid,.faq{grid-template-columns:1fr}header{padding:36px 15px 42px}.card{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">QR <span>Forge</span></div>
+<p>Create QR codes for links, WhatsApp, Wi‑Fi, social profiles, maps, contacts, events and more — free, fast and mobile-friendly.</p>
+</header>
+
+<nav>
+<a href="#generator">Generator</a><a href="#scanner">Scanner</a><a href="#tools">Tools</a><a href="#guides">Guides</a><a href="#faq">FAQ</a>
+</nav>
+
+<main>
+<section class="card" id="generator">
+<h2>Free QR Code Generator</h2>
+<p class="muted">Choose a type, enter your information and customize your QR code.</p>
+<div class="tabs" id="tabs"></div>
+<div id="fields"></div>
+
+<div class="options">
+<h3>Customize your QR</h3>
+<div class="grid3">
+<div><label>QR color</label><input id="fg" class="color" type="color" value="#111827"></div>
+<div><label>Background</label><input id="bg" class="color" type="color" value="#ffffff"></div>
+<div><label>Size</label><select id="size"><option>220</option><option selected>300</option><option>400</option><option>600</option></select></div>
+</div>
+<div class="grid">
+<div><label>Error correction</label><select id="ecc"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">Quartile</option><option value="H">High</option></select></div>
+<div><label>Logo (optional)</label><input id="logo" type="file" accept="image/*"></div>
+</div>
+</div>
+<button class="btn primary" id="generate">⚡ Generate QR Code</button>
+<button class="btn secondary" id="clear" style="width:100%;margin-top:9px">Clear</button>
+</section>
+
+<section class="card" id="qrWrap">
+<div id="qr"><span class="hint">Your QR code will appear here</span></div>
+<div class="downloads" id="downloads" style="display:none">
+<button class="btn secondary" id="png">⬇ PNG</button><button class="btn secondary" id="jpg">⬇ JPG</button><button class="btn secondary" id="svg">⬇ SVG</button>
+</div>
+<p class="hint">Tip: test every QR code with a phone before printing or sharing.</p>
+</section>
+
+<section class="card" id="scanner">
+<h2>QR Code Scanner</h2>
+<p class="muted">Scan with your camera when supported, or upload a QR image.</p>
+<div class="grid">
+<div><button class="btn primary" id="cameraBtn">📷 Start Camera Scanner</button><video id="video" playsinline style="width:100%;border-radius:14px;margin-top:10px;display:none"></video></div>
+<div><label>Scan a QR image</label><input id="scanImage" type="file" accept="image/*"><canvas id="scanCanvas" style="display:none"></canvas><div id="scanResult" class="notice" style="margin-top:12px">Scanner result will appear here.</div></div>
+</div>
+</section>
+
+<section class="card" id="tools">
+<h2>Useful QR Tools</h2>
+<div class="features">
+<div class="feature"><b>📦 Bulk QR Generator</b><p class="muted">Enter multiple URLs or text values, one per line, then generate a downloadable set.</p><button class="btn secondary" onclick="bulkGenerate()">Create Bulk QRs</button></div>
+<div class="feature"><b>📶 Wi‑Fi QR</b><p class="muted">Share Wi‑Fi details without typing a long password.</p><button class="btn secondary" onclick="chooseType('wifi')">Make Wi‑Fi QR</button></div>
+<div class="feature"><b>🖼️ Image → QR reader</b><p class="muted">Upload a QR image to try browser QR detection.</p><button class="btn secondary" onclick="document.getElementById('scanImage').click()">Read QR Image</button></div>
+</div>
+</section>
+
+<section class="card" id="seo">
+<h2>QR Code Generators</h2>
+<div class="seo-grid">
+<div class="seo-item"><b>Free QR Code Generator</b><p class="muted">Create and download QR codes instantly.</p></div>
+<div class="seo-item"><b>WhatsApp QR Code</b><p class="muted">Create a WhatsApp chat QR from a phone number and message.</p></div>
+<div class="seo-item"><b>Wi‑Fi QR Code</b><p class="muted">Share Wi‑Fi network information quickly.</p></div>
+<div class="seo-item"><b>Google Maps QR</b><p class="muted">Turn a Google Maps link or location into a QR code.</p></div>
+<div class="seo-item"><b>YouTube QR</b><p class="muted">Share a YouTube channel or video using a QR code.</p></div>
+<div class="seo-item"><b>QR Code for Business</b><p class="muted">Share websites, contacts, menus, maps and social profiles.</p></div>
+</div>
+</section>
+
+<section class="card" id="guides">
+<h2>Helpful Guides</h2>
+<div class="faq">
+<div><h3>How to create a QR code</h3><p class="muted">Choose a QR type, enter your details, customize the design and tap Generate. Download the result when you're happy with it.</p></div>
+<div><h3>How to scan a QR code</h3><p class="muted">Open your phone camera and point it at the QR code. If your camera does not support QR scanning, use a trusted QR scanner.</p></div>
+<div><h3>How to make a Wi‑Fi QR</h3><p class="muted">Choose Wi‑Fi, enter the network name, password and security type, then generate the QR.</p></div>
+<div><h3>How to create a WhatsApp QR</h3><p class="muted">Choose WhatsApp, enter the full international phone number and optional message, then generate the QR.</p></div>
+</div>
+</section>
+
+<section class="card" id="faq">
+<h2>Frequently Asked Questions</h2>
+<details><summary>Is QR Forge free?</summary><p>Yes. QR generation is free and happens in your browser.</p></details>
+<details><summary>Do you store my QR information?</summary><p>QR Forge is designed to generate QR data in your browser. Avoid entering highly sensitive information into any online tool.</p></details>
+<details><summary>Can I download my QR code?</summary><p>Yes. PNG, JPG and SVG download options are provided.</p></details>
+<details><summary>Can I create a WhatsApp QR code?</summary><p>Yes. Choose WhatsApp and enter the phone number in international format.</p></details>
+<details><summary>Can I use QR Forge on a phone?</summary><p>Yes. The site is responsive and designed for mobile screens.</p></details>
+<details><summary>Will every QR code work forever?</summary><p>A static QR code keeps its encoded information, but the destination itself must remain valid. For example, a QR containing a URL stops being useful if that URL stops working.</p></details>
+</section>
+</main>
+
+<footer>
+<b>QR Forge</b> — Free QR Code Generator<br>
+Fast • Mobile Friendly • Easy to Use
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const types=[
+['url','🔗 URL'],['text','📝 Text'],['phone','📞 Phone'],['email','📧 Email'],['wifi','📶 Wi‑Fi'],
+['whatsapp','💬 WhatsApp'],['instagram','📸 Instagram'],['facebook','📘 Facebook'],['youtube','▶️ YouTube'],
+['maps','📍 Google Maps'],['contact','👤 Contact'],['sms','💬 SMS'],['event','📅 Event'],['payment','💳 Payment / UPI']
+];
+let type='url', qr=null, logoData=null;
+const tabs=document.getElementById('tabs'),fields=document.getElementById('fields');
+types.forEach(([id,label])=>{let b=document.createElement('button');b.dataset.type=id;b.textContent=label;b.onclick=()=>chooseType(id);tabs.appendChild(b)});
+const templates={
+url:`<label>Website URL</label><input id="value" type="url" placeholder="https://example.com">`,
+text:`<label>Text</label><textarea id="value" placeholder="Enter your text"></textarea>`,
+phone:`<label>Phone number</label><input id="value" type="tel" placeholder="+923001234567">`,
+email:`<label>Email</label><input id="email" type="email" placeholder="you@example.com"><label>Subject</label><input id="subject" placeholder="Subject"><label>Message</label><textarea id="message" placeholder="Message"></textarea>`,
+wifi:`<div class="grid"><div><label>Wi‑Fi name (SSID)</label><input id="ssid" placeholder="My WiFi"></div><div><label>Password</label><input id="password" type="password" placeholder="Password"></div></div><label>Security</label><select id="security"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="">Open</option></select>`,
+whatsapp:`<label>WhatsApp phone number (international format)</label><input id="value" type="tel" placeholder="+923001234567"><label>Message (optional)</label><textarea id="message" placeholder="Hello!"></textarea>`,
+instagram:`<label>Instagram profile URL</label><input id="value" placeholder="https://instagram.com/username">`,
+facebook:`<label>Facebook page/profile URL</label><input id="value" placeholder="https://facebook.com/username">`,
+youtube:`<label>YouTube video/channel URL</label><input id="value" placeholder="https://youtube.com/@channel">`,
+maps:`<label>Google Maps URL or location</label><input id="value" placeholder="Paste a Google Maps link">`,
+contact:`<div class="grid"><div><label>Full name</label><input id="name" placeholder="Your name"></div><div><label>Phone</label><input id="phone" placeholder="+923001234567"></div></div><label>Email</label><input id="email" placeholder="you@example.com"><label>Organization</label><input id="org" placeholder="Company (optional)">`,
+sms:`<label>Phone number</label><input id="phone" placeholder="+923001234567"><label>Message</label><textarea id="message" placeholder="Your SMS"></textarea>`,
+event:`<div class="grid"><div><label>Event title</label><input id="title" placeholder="My Event"></div><div><label>Location</label><input id="location" placeholder="Islamabad"></div></div><label>Start</label><input id="start" type="datetime-local"><label>End</label><input id="end" type="datetime-local"><label>Description</label><textarea id="desc" placeholder="Event details"></textarea>`,
+payment:`<label>Payment link / UPI URI</label><input id="value" placeholder="Paste your payment link or UPI URI"><p class="hint">Payment QR support depends on the payment system. QR Forge does not process payments.</p>`
+};
+function chooseType(t){type=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.type===t));fields.innerHTML=templates[t]||templates.url;window.scrollTo({top:document.getElementById('generator').offsetTop-55,behavior:'smooth'})}
+chooseType('url');
+
+function val(id){let x=document.getElementById(id);return x?x.value.trim():''}
+function dataForType(){
+if(type==='url'||type==='text'||type==='phone'||type==='instagram'||type==='facebook'||type==='youtube'||type==='maps'||type==='payment')return val('value')||(type==='phone'?'tel:':'');
+if(type==='email')return `mailto:${val('email')}?subject=${encodeURIComponent(val('subject'))}&body=${encodeURIComponent(val('message'))}`;
+if(type==='wifi')return `WIFI:T:${val('security')};S:${val('ssid')};P:${val('password')};;`;
+if(type==='whatsapp'){let n=val('value').replace(/[^\d]/g,'');return `https://wa.me/${n}${val('message')?'?text='+encodeURIComponent(val('message')):''}`}
+if(type==='contact')return `BEGIN:VCARD\nVERSION:3.0\nFN:${val('name')}\nORG:${val('org')}\nTEL:${val('phone')}\nEMAIL:${val('email')}\nEND:VCARD`;
+if(type==='sms')return `SMSTO:${val('phone')}:${val('message')}`;
+if(type==='event'){let s=val('start').replace(/[-:]/g,'').replace('T','T'),e=val('end').replace(/[-:]/g,'').replace('T','T');return `BEGIN:VEVENT\nSUMMARY:${val('title')}\nLOCATION:${val('location')}\nDTSTART:${s}\nDTEND:${e}\nDESCRIPTION:${val('desc')}\nEND:VEVENT`}
+return '';
+}
+function generate(){
+let data=dataForType();if(!data){alert('Please enter the required information first.');return}
+let size=+document.getElementById('size').value, eccMap={L:QRCode.CorrectLevel.L,M:QRCode.CorrectLevel.M,Q:QRCode.CorrectLevel.Q,H:QRCode.CorrectLevel.H};
+document.getElementById('qr').innerHTML='';let box=document.createElement('div');box.className='qrbox';box.id='qrbox';document.getElementById('qr').appendChild(box);
+qr=new QRCode(box,{text:data,width:size,height:size,colorDark:document.getElementById('fg').value,colorLight:document.getElementById('bg').value,correctLevel:eccMap[document.getElementById('ecc').value]});
+document.getElementById('downloads').style.display='flex';
+setTimeout(()=>{if(logoData){let c=box.querySelector('canvas');if(c){let ctx=c.getContext('2d'),im=new Image();im.onload=()=>{let s=Math.round(c.width*.22),x=(c.width-s)/2,y=(c.height-s)/2;ctx.fillStyle=document.getElementById('bg').value;ctx.fillRect(x-5,y-5,s+10,s+10);ctx.drawImage(im,x,y,s,s)}};im.src=logoData}},150);
+}
+document.getElementById('generate').onclick=generate;
+document.getElementById('clear').onclick=()=>{chooseType(type);document.getElementById('qr').innerHTML='<span class="hint">Your QR code will appear here</span>';document.getElementById('downloads').style.display='none'};
+document.getElementById('logo').onchange=e=>{let f=e.target.files[0];if(f){let r=new FileReader();r.onload=()=>logoData=r.result;r.readAsDataURL(f)}};
+function download(ext){let c=document.querySelector('#qr canvas');if(!c){alert('Generate a QR code first.');return}let a=document.createElement('a');
+if(ext==='png'){a.href=c.toDataURL('image/png');a.download='qr-forge.png';a.click();return}
+let out=document.createElement('canvas');out.width=c.width;out.height=c.height;let x=out.getContext('2d');x.fillStyle=document.getElementById('bg').value;x.fillRect(0,0,out.width,out.height);x.drawImage(c,0,0);
+if(ext==='jpg'){a.href=out.toDataURL('image/jpeg',.95);a.download='qr-forge.jpg';a.click();return}
+let url=out.toDataURL('image/png');a.href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${out.width}" height="${out.height}"><image href="${url}" width="100%" height="100%"/></svg>`);a.download='qr-forge.svg';a.click();
+}
+png.onclick=()=>download('png');jpg.onclick=()=>download('jpg');svg.onclick=()=>download('svg');
+
+function bulkGenerate(){let input=prompt('Paste URLs or text, one per line:');if(!input)return;let lines=input.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!lines.length)return;let w=window.open('','_blank');w.document.write('<title>QR Forge Bulk QRs</title><style>body{font-family:Arial;padding:20px}.item{display:inline-block;margin:15px;padding:15px;border:1px solid #ddd;text-align:center}</style><h1>QR Forge Bulk QR Codes</h1><p>Right-click/save each QR image.</p>');lines.forEach((line,i)=>{let d=w.document.createElement('div');d.className='item';d.innerHTML='<p>'+i+1+'.</p><div id="q'+i+'"></div><small>'+line.replace(/</g,'&lt;')+'</small>';w.document.body.appendChild(d);new QRCode(d.querySelector('div'),{text:line,width:200,height:200})});}
+
+let video=document.getElementById('video'),stream=null;
+cameraBtn.onclick=async()=>{if(!('BarcodeDetector' in window)){alert('Camera QR detection is not supported by this browser. Try Chrome on a supported device or use image upload.');return}try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});video.srcObject=stream;video.style.display='block';await video.play();let detector=new BarcodeDetector({formats:['qr_code']});let scan=async()=>{if(video.readyState>=2){let codes=await detector.detect(video);if(codes.length){scanResult.textContent=codes[0].rawValue;stream.getTracks().forEach(t=>t.stop());return}}requestAnimationFrame(scan)};scan()}catch(e){alert('Camera permission was not available.')}}; 
+scanImage.onchange=e=>{let f=e.target.files[0];if(!f)return;if(!('BarcodeDetector' in window)){scanResult.textContent='Your browser does not support image QR detection. Try a modern Chrome browser.';return}let im=new Image();im.onload=async()=>{try{let d=new BarcodeDetector({formats:['qr_code']}),c=document.getElementById('scanCanvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let r=await d.detect(c);scanResult.textContent=r.length?r[0].rawValue:'No QR code found in this image.'}catch(err){scanResult.textContent='Could not read this QR image.'}};im.src=URL.createObjectURL(f)};
+</script>
+</body>
+</html>
