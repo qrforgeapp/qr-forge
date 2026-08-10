@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Forge — Free QR Code Generator</title>
+<meta name="description" content="QR Forge is a free QR code generator for URLs, text, phone, email and Wi-Fi.">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+.container{max-width:900px;margin:auto;padding:24px}
+header{text-align:center;padding:30px 10px 18px}
+.logo{font-size:34px;font-weight:800}.logo span{color:#4f46e5}
+.subtitle{color:#667085;margin-top:8px}
+.card{background:white;border-radius:20px;padding:22px;box-shadow:0 8px 30px #00000012;margin-top:18px}
+.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
+.tab{border:0;background:#eef0f5;padding:11px 15px;border-radius:12px;white-space:nowrap;cursor:pointer}
+.tab.active{background:#4f46e5;color:white}
+label{display:block;font-weight:700;margin:15px 0 7px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #d8dce5;border-radius:11px;font-size:16px}
+textarea{min-height:100px;resize:vertical}
+button{cursor:pointer}
+.generate{width:100%;border:0;background:#4f46e5;color:white;padding:14px;border-radius:12px;font-size:17px;font-weight:700;margin-top:18px}
+.result{text-align:center}.qrbox{min-height:270px;display:flex;align-items:center;justify-content:center;padding:18px}
+.qrbox img{max-width:250px;border-radius:8px}
+.downloads{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.downloads button{border:0;background:#172033;color:white;padding:11px 17px;border-radius:10px}
+.hidden{display:none}
+footer{text-align:center;color:#667085;font-size:13px;padding:25px}
+@media(max-width:600px){.container{padding:14px}.card{padding:16px}.logo{font-size:29px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="logo">QR <span>Forge</span></div>
+<div class="subtitle">Create beautiful QR codes for free — no login required.</div>
+</header>
+
+<div class="card">
+<div class="tabs">
+<button class="tab active" onclick="setType('url',this)">URL</button>
+<button class="tab" onclick="setType('text',this)">Text</button>
+<button class="tab" onclick="setType('phone',this)">Phone</button>
+<button class="tab" onclick="setType('email',this)">Email</button>
+<button class="tab" onclick="setType('wifi',this)">Wi-Fi</button>
+</div>
+
+<div id="fields"></div>
+
+<label>QR Color</label>
+<input id="fg" type="color" value="#000000">
+<label>Background</label>
+<input id="bg" type="color" value="#ffffff">
+<button class="generate" onclick="generateQR()">Generate QR Code</button>
+</div>
+
+<div class="card result">
+<h2>Your QR Code</h2>
+<div id="qrbox" class="qrbox"><div>Enter your information and tap Generate.</div></div>
+<div id="downloads" class="downloads hidden">
+<button onclick="downloadQR('png')">Download PNG</button>
+<button onclick="downloadQR('jpg')">Download JPG</button>
+<button onclick="downloadSVG()">Download SVG</button>
+</div>
+</div>
+</div>
+<footer>© 2026 QR Forge · Free QR Code Generator</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+let type='url', lastData='';
+function setType(t,btn){
+ type=t;
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ btn.classList.add('active');
+ renderFields();
+}
+function renderFields(){
+ const f=document.getElementById('fields');
+ const common='<label>Content</label><textarea id="content" placeholder="Enter your information here"></textarea>';
+ if(type==='url') f.innerHTML='<label>Website URL</label><input id="content" placeholder="https://example.com">';
+ else if(type==='text') f.innerHTML=common;
+ else if(type==='phone') f.innerHTML='<label>Phone Number</label><input id="content" placeholder="+92 300 1234567">';
+ else if(type==='email') f.innerHTML='<label>Email Address</label><input id="content" placeholder="name@example.com"><label>Subject</label><input id="subject" placeholder="Optional"><label>Message</label><textarea id="message" placeholder="Optional message"></textarea>';
+ else if(type==='wifi') f.innerHTML='<label>Wi-Fi Name (SSID)</label><input id="ssid" placeholder="My WiFi"><label>Password</label><input id="password" placeholder="Password"><label>Security</label><select id="security"><option>WPA</option><option>WEP</option><option>nopass</option></select>';
+}
+function getData(){
+ if(type==='url'||type==='text'||type==='phone') return type==='phone'?'tel:'+document.getElementById('content').value:document.getElementById('content').value;
+ if(type==='email'){
+  let e=document.getElementById('content').value, s=document.getElementById('subject').value, m=document.getElementById('message').value;
+  return `mailto:${e}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(m)}`;
+ }
+ let ss=document.getElementById('ssid').value, p=document.getElementById('password').value, sec=document.getElementById('security').value;
+ return `WIFI:T:${sec};S:${ss};P:${p};;`;
+}
+function generateQR(){
+ lastData=getData();
+ if(!lastData.trim()){alert('Please enter information first.');return;}
+ const qr=qrcode(0,'M'); qr.addData(lastData); qr.make();
+ const fg=document.getElementById('fg').value, bg=document.getElementById('bg').value;
+ const svg=qr.createSvgTag({cellSize:8,margin:4});
+ const styled=svg.replace('<svg ',`<svg style="background:${bg}" `).replace(/fill="#000000"/g,`fill="${fg}"`);
+ const blob=new Blob([styled],{type:'image/svg+xml'});
+ const url=URL.createObjectURL(blob);
+ document.getElementById('qrbox').innerHTML=`<img id="qrimg" src="${url}" alt="Generated QR code">`;
+ document.getElementById('downloads').classList.remove('hidden');
+}
+function downloadQR(ext){
+ const img=document.getElementById('qrimg'); if(!img)return;
+ const c=document.createElement('canvas'),size=800;c.width=c.height=size;
+ const ctx=c.getContext('2d');ctx.fillStyle=document.getElementById('bg').value;ctx.fillRect(0,0,size,size);
+ const image=new Image();image.onload=()=>{ctx.drawImage(image,0,0,size,size);const a=document.createElement('a');a.download='qr-forge.'+ext;a.href=c.toDataURL(ext==='jpg'?'image/jpeg':'image/png');a.click();};image.src=img.src;
+}
+function downloadSVG(){
+ const img=document.getElementById('qrimg'); if(!img)return;
+ fetch(img.src).then(r=>r.blob()).then(b=>{const a=document.createElement('a');a.download='qr-forge.svg';a.href=URL.createObjectURL(b);a.click();});
+}
+renderFields();
+</script>
+</body>
+</html>
