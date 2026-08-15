@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Barcode Generator Online | QR Forge</title>
+
+<meta name="description" content="Create free barcodes online with QR Forge. Generate Code 128, Code 39, EAN-13 and UPC barcodes instantly and download your barcode.">
+
+<meta name="keywords" content="barcode generator, free barcode generator, online barcode generator, Code 128 barcode, Code 39 barcode, EAN-13 barcode, UPC barcode">
+
+<link rel="canonical" href="https://qrforgeapp.github.io/qr-forge/barcode-generator.html">
+
+<meta property="og:title" content="Free Barcode Generator Online | QR Forge">
+<meta property="og:description" content="Create and download barcodes online for free. Supports Code 128, Code 39, EAN-13 and UPC.">
+<meta property="og:url" content="https://qrforgeapp.github.io/qr-forge/barcode-generator.html">
+<meta property="og:type" content="website">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f6f7fb;
+  color: #172033;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  background: #ffffff;
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+.muted {
+  color: #666;
+  line-height: 1.6;
+}
+
+.card {
+  background: #fff;
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.primary {
+  background: #5b4cff;
+  color: white;
+}
+
+.secondary {
+  background: #edf0f7;
+  color: #172033;
+}
+
+#barcodeResult {
+  text-align: center;
+  margin-top: 25px;
+  display: none;
+}
+
+#barcodeSvg {
+  max-width: 100%;
+  height: auto;
+}
+
+nav {
+  text-align: center;
+  margin-top: 15px;
+}
+
+nav a {
+  margin: 0 8px;
+  color: #4b3ff0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.faq details {
+  margin-bottom: 12px;
+  background: #f7f8fc;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 10px;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 27px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Free Barcode Generator Online</h1>
+
+  <p class="muted">
+    Create and download barcodes instantly with QR Forge.
+    No registration or app installation required.
+  </p>
+
+  <nav>
+    <a href="index.html">QR Generator</a>
+    <a href="barcode-generator.html">Barcode Generator</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<section class="card">
+  <h2>Create Your Barcode</h2>
+
+  <p class="muted">
+    Enter your text or number, choose a barcode format, and generate your
+    barcode instantly.
+  </p>
+
+  <label for="barcodeText">Barcode Text</label>
+
+  <input
+    id="barcodeText"
+    type="text"
+    placeholder="Enter number or text"
+  >
+
+  <label for="barcodeFormat">Barcode Format</label>
+
+  <select id="barcodeFormat">
+    <option value="CODE128">Code 128</option>
+    <option value="CODE39">Code 39</option>
+    <option value="EAN13">EAN-13</option>
+    <option value="UPC">UPC</option>
+  </select>
+
+  <button class="primary" id="generateBarcode">
+    Generate Barcode
+  </button>
+
+  <div id="barcodeResult">
+    <svg id="barcodeSvg"></svg>
+
+    <br>
+
+    <button class="secondary" id="downloadBarcode">
+      Download Barcode
+    </button>
+  </div>
+</section>
+
+
+<section class="card">
+  <h2>Free Online Barcode Generator</h2>
+
+  <p>
+    QR Forge is a free online barcode generator that lets you create
+    barcodes directly in your web browser. You can generate barcodes
+    without installing an application or creating an account.
+  </p>
+
+  <p>
+    Enter your product number, text, or other supported information,
+    select a barcode format, and click the Generate Barcode button.
+    You can then download the generated barcode.
+  </p>
+</section>
+
+
+<section class="card">
+  <h2>Supported Barcode Formats</h2>
+
+  <h3>Code 128</h3>
+  <p class="muted">
+    Code 128 is a widely used barcode format suitable for many types
+    of numbers and text.
+  </p>
+
+  <h3>Code 39</h3>
+  <p class="muted">
+    Code 39 is commonly used for identification and inventory purposes.
+  </p>
+
+  <h3>EAN-13</h3>
+  <p class="muted">
+    EAN-13 is commonly used for retail product identification.
+  </p>
+
+  <h3>UPC</h3>
+  <p class="muted">
+    UPC barcodes are widely used for products sold in retail stores.
+  </p>
+</section>
+
+
+<section class="card">
+  <h2>How to Create a Barcode</h2>
+
+  <ol>
+    <li>Enter your text or number.</li>
+    <li>Select a barcode format.</li>
+    <li>Click Generate Barcode.</li>
+    <li>Download your barcode.</li>
+  </ol>
+</section>
+
+
+<section class="card faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <details>
+    <summary>Is this barcode generator free?</summary>
+    <p>
+      Yes. QR Forge provides a free online barcode generator.
+    </p>
+  </details>
+
+  <details>
+    <summary>Do I need to install an app?</summary>
+    <p>
+      No. The barcode generator works directly in your web browser.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I download my barcode?</summary>
+    <p>
+      Yes. After generating a barcode, you can download it as an SVG file.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does it work on mobile phones?</summary>
+    <p>
+      Yes. The page is designed to work on mobile phones, tablets,
+      and desktop browsers.
+    </p>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  QR Forge — Free QR Code & Barcode Generator
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
+<script>
+
+const textInput = document.getElementById("barcodeText");
+const formatInput = document.getElementById("barcodeFormat");
+const generateButton = document.getElementById("generateBarcode");
+const downloadButton = document.getElementById("downloadBarcode");
+const result = document.getElementById("barcodeResult");
+const barcodeSvg = document.getElementById("barcodeSvg");
+
+
+generateButton.addEventListener("click", function() {
+
+  const text = textInput.value.trim();
+  const format = formatInput.value;
+
+  if (!text) {
+    alert("Please enter text or a number.");
+    return;
+  }
+
+  try {
+
+    JsBarcode("#barcodeSvg", text, {
+      format: format,
+      width: 2,
+      height: 80,
+      displayValue: true,
+      margin: 10
+    });
+
+    result.style.display = "block";
+
+  } catch (error) {
+
+    alert("This value is not valid for the selected barcode format.");
+
+  }
+
+});
+
+
+downloadButton.addEventListener("click", function() {
+
+  const svg = document.getElementById("barcodeSvg");
+
+  const serializer = new XMLSerializer();
+
+  const source = serializer.serializeToString(svg);
+
+  const blob = new Blob(
+    [source],
+    {
+      type: "image/svg+xml;charset=utf-8"
+    }
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "qr-forge-barcode.svg";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+
+});
+
+</script>
+
+</body>
+</html>
