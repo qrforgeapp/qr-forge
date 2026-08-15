@@ -109,7 +109,39 @@ footer{padding:35px 15px;text-align:center;color:var(--muted)}footer a{color:var
 </div>
 </section>
 
-<section class="card" id="seo">
+<section class="card" id="barcode">
+  <h2>Barcode Generator</h2>
+  <p class="muted">Create Code 128 and other barcodes instantly.</p>
+
+  <div class="grid">
+    <div>
+      <label>Barcode text</label>
+      <input id="barcodeText" type="text" placeholder="Enter number or text">
+    </div>
+
+    <div>
+      <label>Format</label>
+      <select id="barcodeFormat">
+        <option value="CODE128">Code 128</option>
+        <option value="CODE39">Code 39</option>
+        <option value="EAN13">EAN-13</option>
+        <option value="UPC">UPC</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn primary" id="generateBarcode">
+    Generate Barcode
+  </button>
+
+  <div id="barcodeResult" style="text-align:center;margin-top:20px;display:none;">
+    <svg id="barcodeSvg"></svg>
+    <br>
+    <button class="btn secondary" id="downloadBarcode">
+      Download Barcode
+    </button>
+  </div>
+</section><section class="card" id="seo">
 <h2>QR Code Generators</h2>
 <div class="seo-grid">
 <div class="seo-item"><b>Free QR Code Generator</b><p class="muted">Create and download QR codes instantly.</p></div>
@@ -350,6 +382,46 @@ function bulkGenerate(){let input=prompt('Paste URLs or text, one per line:');if
 let video=document.getElementById('video'),stream=null;
 cameraBtn.onclick=async()=>{if(!('BarcodeDetector' in window)){alert('Camera QR detection is not supported by this browser. Try Chrome on a supported device or use image upload.');return}try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});video.srcObject=stream;video.style.display='block';await video.play();let detector=new BarcodeDetector({formats:['qr_code']});let scan=async()=>{if(video.readyState>=2){let codes=await detector.detect(video);if(codes.length){scanResult.textContent=codes[0].rawValue;stream.getTracks().forEach(t=>t.stop());return}}requestAnimationFrame(scan)};scan()}catch(e){alert('Camera permission was not available.')}}; 
 scanImage.onchange=e=>{let f=e.target.files[0];if(!f)return;if(!('BarcodeDetector' in window)){scanResult.textContent='Your browser does not support image QR detection. Try a modern Chrome browser.';return}let im=new Image();im.onload=async()=>{try{let d=new BarcodeDetector({formats:['qr_code']}),c=document.getElementById('scanCanvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);let r=await d.detect(c);scanResult.textContent=r.length?r[0].rawValue:'No QR code found in this image.'}catch(err){scanResult.textContent='Could not read this QR image.'}};im.src=URL.createObjectURL(f)};
-</script>
+document.getElementById('generateBarcode').onclick = function () {
+  const text = document.getElementById('barcodeText').value.trim();
+  const format = document.getElementById('barcodeFormat').value;
+
+  if (!text) {
+    alert('Please enter text or a number.');
+    return;
+  }
+
+  try {
+    JsBarcode('#barcodeSvg', text, {
+      format: format,
+      width: 2,
+      height: 80,
+      displayValue: true,
+      margin: 10
+    });
+
+    document.getElementById('barcodeResult').style.display = 'block';
+  } catch (error) {
+    alert('This value is not valid for the selected barcode format.');
+  }
+};
+
+document.getElementById('downloadBarcode').onclick = function () {
+  const svg = document.getElementById('barcodeSvg');
+  const serializer = new XMLSerializer();
+  const source = serializer.serializeToString(svg);
+  const blob = new Blob([source], {
+    type: 'image/svg+xml;charset=utf-8'
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+
+  a.href = url;
+  a.download = 'barcode.svg';
+  a.click();
+
+  URL.revokeObjectURL(url);
+};</script>
 </body>
 </html>
