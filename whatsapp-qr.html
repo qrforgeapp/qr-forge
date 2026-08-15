@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WhatsApp QR Code Generator – Free Online</title>
+
+<meta name="description" content="Create a free WhatsApp QR code online. Enter your phone number and optional message to generate a QR code that opens WhatsApp instantly.">
+
+<meta name="keywords" content="WhatsApp QR code generator, WhatsApp QR code, free WhatsApp QR code, create WhatsApp QR code">
+
+<link rel="canonical" href="https://qrforgeapp.github.io/qr-forge/whatsapp-qr.html">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fa;
+  color:#222;
+}
+
+header{
+  background:#111827;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+header p{
+  margin:0;
+  opacity:.9;
+}
+
+nav{
+  background:white;
+  padding:14px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+nav a{
+  margin:0 10px;
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:25px auto;
+  padding:15px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+h2{
+  margin-top:0;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+
+input,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  border:0;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+#qrcode{
+  text-align:center;
+  margin-top:25px;
+}
+
+.download{
+  display:none;
+  background:#16a34a;
+}
+
+.info{
+  line-height:1.7;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  background:#111827;
+  color:white;
+  margin-top:30px;
+}
+
+footer a{
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>WhatsApp QR Code Generator</h1>
+  <p>Create a free WhatsApp QR code online</p>
+</header>
+
+<nav>
+  <a href="index.html">QR Generator</a>
+  <a href="index.html#scanner">QR Scanner</a>
+  <a href="index.html#tools">QR Tools</a>
+  <a href="index.html#guides">Guides</a>
+</nav>
+
+<main class="container">
+
+<section class="card">
+
+<h2>Create a WhatsApp QR Code</h2>
+
+<p>
+Create a WhatsApp QR code that lets people open a WhatsApp chat
+with your phone number instantly. No app or registration is required.
+</p>
+
+<label for="phone">WhatsApp Phone Number</label>
+
+<input
+  type="tel"
+  id="phone"
+  placeholder="Example: 923001234567"
+>
+
+<p style="font-size:14px;color:#666;">
+Enter your number with the country code and without the + sign.
+</p>
+
+<label for="message">Optional Message</label>
+
+<textarea
+  id="message"
+  rows="4"
+  placeholder="Hello! I found your WhatsApp QR code."
+></textarea>
+
+<button onclick="generateQR()">
+  Generate WhatsApp QR Code
+</button>
+
+<div id="qrcode"></div>
+
+<button id="downloadBtn" class="download" onclick="downloadQR()">
+  Download QR Code
+</button>
+
+</section>
+
+<section class="card info">
+
+<h2>What is a WhatsApp QR Code?</h2>
+
+<p>
+A WhatsApp QR code is a scannable code that can open a WhatsApp
+conversation with a specific phone number. It makes it easier for
+customers, friends, and visitors to contact you without manually
+saving your number.
+</p>
+
+<h2>How to Create a WhatsApp QR Code</h2>
+
+<ol>
+<li>Enter your WhatsApp phone number with the country code.</li>
+<li>Add an optional pre-written message.</li>
+<li>Click <strong>Generate WhatsApp QR Code</strong>.</li>
+<li>Scan the QR code with a phone.</li>
+<li>Download and share your QR code.</li>
+</ol>
+
+<h2>Where Can You Use a WhatsApp QR Code?</h2>
+
+<ul>
+<li>Business cards</li>
+<li>Restaurants and menus</li>
+<li>Social media profiles</li>
+<li>Posters and flyers</li>
+<li>Online stores</li>
+<li>Business websites</li>
+</ul>
+
+<h2>Is This WhatsApp QR Code Generator Free?</h2>
+
+<p>
+Yes. QR Forge provides a free online WhatsApp QR code generator.
+You can create a QR code directly in your browser without creating
+an account.
+</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Do I need to install an app?</h3>
+<p>
+No. You can create the QR code directly from your web browser.
+</p>
+
+<h3>Should I include the country code?</h3>
+<p>
+Yes. Enter your full international phone number without the plus
+sign. For example, a Pakistani number can start with 92.
+</p>
+
+<h3>Can I add a WhatsApp message?</h3>
+<p>
+Yes. You can enter an optional message that will appear when the
+WhatsApp chat opens.
+</p>
+
+<h3>Can I download the QR code?</h3>
+<p>
+Yes. After generating the QR code, use the download button to save
+it as an image.
+</p>
+
+</section>
+
+<section class="card">
+
+<h2>More QR Code Tools</h2>
+
+<p>
+Need another QR code? Try our
+<a href="index.html">Free QR Code Generator</a>
+or explore the other QR tools available on QR Forge.
+</p>
+
+</section>
+
+</main>
+
+<footer>
+  <b>QR Forge</b> – Free QR Code Generator
+  <br><br>
+  <a href="index.html">Home</a> |
+  <a href="privacy-1.html">Privacy Policy</a> |
+  <a href="contact.html">Contact</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+let qr;
+
+function generateQR(){
+
+  const phone = document.getElementById("phone").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const box = document.getElementById("qrcode");
+
+  if(!phone){
+    alert("Please enter your WhatsApp phone number.");
+    return;
+  }
+
+  if(!/^[0-9]+$/.test(phone)){
+    alert("Please enter numbers only with the country code.");
+    return;
+  }
+
+  let whatsappURL = "https://wa.me/" + phone;
+
+  if(message){
+    whatsappURL += "?text=" + encodeURIComponent(message);
+  }
+
+  box.innerHTML = "";
+
+  qr = new QRCode(box,{
+    text:whatsappURL,
+    width:220,
+    height:220,
+    correctLevel:QRCode.CorrectLevel.H
+  });
+
+  document.getElementById("downloadBtn").style.display="block";
+}
+
+function downloadQR(){
+
+  const canvas = document.querySelector("#qrcode canvas");
+
+  if(!canvas){
+    alert("Please generate the QR code first.");
+    return;
+  }
+
+  const link = document.createElement("a");
+
+  link.download = "whatsapp-qr-code.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+
+</script>
+
+</body>
+</html>
